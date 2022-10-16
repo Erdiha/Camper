@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from '../components/modal';
+import Modal from '../components/Modal';
 function Cards({ ...props }) {
   const [readMore, setReadMore] = useState(false);
   const [showModal, setShowModal] = useState(false);
