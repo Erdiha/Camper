@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.0.13",
+    "@react-navigation/native-stack": "^6.9.1",
     "next": "latest",
     "node-fetch": "^2.6.1",
-    "react": "17.0.2",
+    "react": "^18.2.0",
     "react-dom": "18.2.0",
     "recoil": "^0.7.6",
     "tailwind-scrollbar-hide": "^1.1.7"
