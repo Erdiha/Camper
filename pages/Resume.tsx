@@ -43,6 +43,7 @@ function resume() {
               <p className="font-semibold">
                 Portfolio:{' '}
                 <a
+                  rel="noreferrer"
                   className="italic text-blue-400 underline"
                   target="_blank"
                   href="https://www.erdiha.com">
@@ -52,6 +53,7 @@ function resume() {
               <p className="font-semibold">
                 Github:{' '}
                 <a
+                  rel="noreferrer"
                   className="italic text-blue-400 underline"
                   target="_blank"
                   href="https://github.com/Erdiha">

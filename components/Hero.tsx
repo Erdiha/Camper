@@ -37,7 +37,7 @@ function Hero(props: any) {
   console.log(datas, search);
   return (
     <div className="relative p-5 flex  flex-col items-center">
-      <h1 className="text-2xl mb-5">Let's Find National Parks!</h1>
+      <h1 className="text-2xl mb-5">Let&apos;s Find National Parks!</h1>
       <div className=" flex justify-center gap-2 items-center w-full">
         <input
           placeholder="eg. California"
