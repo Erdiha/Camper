@@ -7,7 +7,6 @@ import Createpdf from './Createpdf';
 import { url, api } from '../data/data';
 import { IPark } from '../data/types';
 import { useEffect, useState } from 'react';
-import { StyleSheet } from '@react-pdf/renderer';
 import { useRecoilState } from 'recoil';
 import { InputSearch } from '../recoil/atom';
 
