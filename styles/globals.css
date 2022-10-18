@@ -28,12 +28,13 @@
   .navbar-items:hover {
     @apply bg-gray-600;
   }
-  .dropdown-items{
-    display: none;
-    position: absolute;
-    min-width: 100px;
-    font-size: 10px;
-  }
- 
 
+ .input{
+  @apply w-[100%] h-[18%] p-2 rounded
+ }
+ .icon{
+  @apply  left-20 top-20 text-4xl
+  font-semibold text-slate-100 md:border-t-4 pl-1 md:pl-0 md:border-l-0
+   md:border-lime-400 justify-center mb-20 border-lime-400 border-l-4
+ }
 }

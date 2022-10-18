@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { allData, stateNames, stateAbbreviations, api } from '../data/data';
-import { IData, IPark } from '../data/types';
 import { atom, useRecoilState } from 'recoil';
 import { InputSearch, atomModal } from '../recoil/atom';
-import Image from 'next/image';
 import Cards from './Cards';
-import ModalComp from './Modal';
 
 function Hero(props: any) {
   const [datas, setDatas]: any = useState();
@@ -13,6 +10,7 @@ function Hero(props: any) {
   const [activeModal, setActiveModal] = useState(false);
   const openModal = useRecoilState(atomModal);
   const handleClick = (e: any) => {
+    
     let words: any | null | ' ';
     if (search) {
       words = search.split(' ');
@@ -43,15 +41,15 @@ function Hero(props: any) {
       <h1 className="text-2xl mb-5">Let&apos;s Find National Parks!</h1>
       <div className=" flex justify-center gap-2 mb-4 items-center w-full">
         <input
+          name="state"
           placeholder="eg. California"
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
+          onChange={()=>handleClick}
           className="bg-slate-300 w-[14rem] rounded-full 
-          focus:bg-slate-100 md:w-[25rem] lg:w-[40rem]
+          focus:bg-slate-100 md:w-[15rem] lg:w-[20rem]
           font-semibold text-xl text-center h-10"
           type="text"
         />
+       
         <button
           onClick={handleClick}
           className="h-10 w-20 rounded-md bg-slate-400">

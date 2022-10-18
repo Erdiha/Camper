@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Hero from '../components/Hero';
 import Navbar from '../components/Navbar';
-import Createpdf from './Createpdf';
 import { url, api } from '../data/data';
 import { IPark } from '../data/types';
 import { useEffect, useState } from 'react';

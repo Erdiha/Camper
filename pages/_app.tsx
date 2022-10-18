@@ -7,10 +7,14 @@ import {
   useRecoilState,
   useRecoilValue,
 } from 'recoil';
-function MyApp({ Component, pageProps }: any) {
+import { AuthProvider } from '../data/authservice';
+import { AppProps } from 'next/app';
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </RecoilRoot>
   );
 }

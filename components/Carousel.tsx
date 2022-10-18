@@ -1,7 +1,6 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { modalPark } from '../recoil/atom';
-import Image from 'next/image';
 
 function Carousel() {
   const [modalpark, setModalPark] = useRecoilState(modalPark);

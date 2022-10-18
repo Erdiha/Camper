@@ -16,8 +16,8 @@ function Cards({ ...props }) {
     transition ease-in-out duration-300">
       <div
         className="flex flex-col 
-      md:hover:border-slate-500 transition duration-300 ease-in-out
-       hover:border-4 md:flex-row md:max-w-3xl
+      
+     md:flex-row md:max-w-3xl
        lg:max-w-[60rem] rounded-lg bg-white shadow-lg">
         <img
           className=" w-full h-96 md:h-auto object-cover md:w-52 
@@ -52,7 +52,7 @@ function Cards({ ...props }) {
           <button
             onClick={() => {
               setAddModalPark(props);
-              setOpenModal((prev: boolean) => !prev);
+              setOpenModal((prev: boolean) => true);
             }}
             className="bg-orange-600 hidden md:flex 
             justify-center items-center rounded w-28 h-10

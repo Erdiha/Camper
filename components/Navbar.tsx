@@ -33,18 +33,16 @@ function Navbar() {
         md:text-2xl md:gap-2 ${showNavbar && 'navbar-mobile'}
       `}>
         <Link href="/">
-          <li className="navbar-items">Home</li>
+          <li className="navbar-items">HOME</li>
         </Link>
-        <Link href="/Createpdf">
-          <li className="navbar-items">Parks & Trails</li>
-        </Link>
-
-        <Link href="/Games">
-          <li className="navbar-items ">Games</li>
+        <Link href="/Myplaces">
+          <li className="navbar-items"> PARKS</li>
         </Link>
 
-        <Link href="/Resume">
-          <li className="navbar-items">Resume</li>
+       
+
+        <Link href="/Account">
+          <li className="navbar-items">ACCOUNT</li>
         </Link>
       </ul>
       <div
