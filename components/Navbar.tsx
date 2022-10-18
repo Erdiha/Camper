@@ -36,7 +36,7 @@ function Navbar() {
           <li className="navbar-items">Home</li>
         </Link>
         <Link href="/Createpdf">
-          <li className="navbar-items">Create PDF</li>
+          <li className="navbar-items">Parks & Trails</li>
         </Link>
 
         <Link href="/Games">

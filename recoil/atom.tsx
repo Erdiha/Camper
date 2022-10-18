@@ -5,7 +5,13 @@ export const InputSearch = atom({
   default: 'CA',
 });
 
-export const modalPark = atom<null | IData[]>({
+export const atomModal = atom({
+  key: 'atomModal',
+  default: false,
+});
+
+export const modalPark = atom<null | IData>({
   key: 'modalPark',
   default: null,
 });
+

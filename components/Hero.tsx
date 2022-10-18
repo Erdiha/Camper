@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { allData, stateNames, stateAbbreviations, api } from '../data/data';
 import { IData, IPark } from '../data/types';
 import { atom, useRecoilState } from 'recoil';
-import { InputSearch } from '../recoil/atom';
+import { InputSearch, atomModal } from '../recoil/atom';
 import Image from 'next/image';
 import Cards from './Cards';
+import ModalComp from './Modal';
+
 function Hero(props: any) {
   const [datas, setDatas]: any = useState();
   const [search, setSearch] = useRecoilState(InputSearch);
-
+  const [activeModal, setActiveModal] = useState(false);
+  const openModal = useRecoilState(atomModal);
   const handleClick = (e: any) => {
     let words: any | null | ' ';
     if (search) {
@@ -36,9 +39,9 @@ function Hero(props: any) {
   }, [search]);
   console.log(datas, search);
   return (
-    <div className="relative p-5 flex  flex-col items-center">
+    <div className="relative p-3 flex  flex-col items-center">
       <h1 className="text-2xl mb-5">Let&apos;s Find National Parks!</h1>
-      <div className=" flex justify-center gap-2 items-center w-full">
+      <div className=" flex justify-center gap-2 mb-4 items-center w-full">
         <input
           placeholder="eg. California"
           onChange={(e) => {
@@ -56,7 +59,7 @@ function Hero(props: any) {
         </button>
       </div>
 
-      <div className="w-full p-5 min-h-[30rem]">
+      <div className="w-full  min-h-[30rem]">
         {datas?.map((item: any) => {
           return <Cards key={item.id} {...item} />;
         })}

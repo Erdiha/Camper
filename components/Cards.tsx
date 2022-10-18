@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
 import Modal from '../components/Modal';
+import { useRecoilState } from 'recoil';
+import { atomModal, modalPark } from '../recoil/atom';
+import { IData } from '../data/types';
+
 function Cards({ ...props }) {
   const [readMore, setReadMore] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [text, setText] = useState('Read More');
+  const [openModal, setOpenModal] = useRecoilState(atomModal);
+  const [addModalPark, setAddModalPark]: any = useRecoilState<IData | null>(
+    modalPark
+  );
   return (
-    <div className="flex justify-center m-2">
-      <div className="flex flex-col md:flex-row md:max-w-3xl lg:max-w-[60rem] rounded-lg bg-white shadow-lg">
+    <div
+      className="flex justify-center my-3  
+    transition ease-in-out duration-300">
+      <div
+        className="flex flex-col 
+      md:hover:border-slate-500 transition duration-300 ease-in-out
+       hover:border-4 md:flex-row md:max-w-3xl
+       lg:max-w-[60rem] rounded-lg bg-white shadow-lg">
         <img
-          className=" w-full h-96 md:h-auto object-cover md:w-52 rounded-t-lg md:rounded-none md:rounded-l-lg"
+          className=" w-full h-96 md:h-auto object-cover md:w-52 
+          rounded-lg  "
           src={`${props.images[0].url}`}
           alt=""
         />
@@ -17,13 +30,13 @@ function Cards({ ...props }) {
             {props.fullName}
           </h5>
 
-          <p className="text-gray-700 cursor-pointer transition duration-300 ease-in-and-out  text-base mb-4">
+          <p className="text-gray-700  transition duration-300 ease-in-and-out  text-base mb-4">
             {!readMore
               ? props.description.substring(0, 200) + '...'
               : props.description}{' '}
             <span
               onClick={() => setReadMore((prev) => !prev)}
-              className="text-slate-400 underline italic hover:text-slate-600 font-semibold">
+              className="text-slate-400 underline italic hover:text-slate-600 font-semibold cursor-pointer">
               {readMore === true ? 'Read Less' : 'Read More'}
             </span>
           </p>
@@ -38,14 +51,17 @@ function Cards({ ...props }) {
           </p>
           <button
             onClick={() => {
-              setShowModal((prev: boolean) => !prev);
+              setAddModalPark(props);
+              setOpenModal((prev: boolean) => !prev);
             }}
-            className="bg-orange-600 rounded w-28 text-white absolute bottom-5 right-10">
+            className="bg-orange-600 hidden md:flex 
+            justify-center items-center rounded w-28 h-10
+             text-white absolute bottom-5 right-10">
             View Details
           </button>
         </div>
       </div>
-      {showModal && <Modal />}
+      {openModal && <Modal />}
     </div>
   );
 }

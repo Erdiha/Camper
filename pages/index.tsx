@@ -14,15 +14,7 @@ export default function Home() {
   const [datas, setDatas]: any = useState();
   const api = process.env.NEXT_PUBLIC_API_KEY;
   const stateName = useRecoilState(InputSearch);
-  // let url = `https://developer.nps.gov/api/v1/parks?api_key=${api}&stateCode=${stateName}&fields=images`;
-  // useEffect(() => {
-  //   async function fetchMyAPI() {
-  //     const allData1 = await fetch(url);
-  //     const allData = await allData1.json();
-  //     setDatas(allData.data);
-  //   }
-  //   fetchMyAPI();
-  // }, [url]);
+
 
   return (
     <div>
