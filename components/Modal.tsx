@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useRecoilState } from 'recoil';
 import { atomModal, modalPark } from '../recoil/atom';
-import carousel from './carousel';
+import carousel from './Carousel';
 
 function ModalComp() {
   const [show, setShow] = useRecoilState(atomModal);
@@ -31,6 +31,7 @@ function ModalComp() {
                 {modalpark.images.map((item: any) => {
                   return (
                     <img
+                      key={item.id}
                       className="w-full h-96 md:h-auto object-cover 
                       md:hover:scale-[2] md:w-52 rounded-lg 
                       "
@@ -51,7 +52,7 @@ function ModalComp() {
                   <br />
                   {modalpark.entranceFees?.map((item: any) => {
                     return (
-                      <>
+                      <div key={item.id}>
                         <i className="text-[12px]">{item?.title}</i>
                         {'-'}
                         <em className="font-semibold text-[12px] text-red-400">
@@ -60,7 +61,7 @@ function ModalComp() {
                         <br />
                         <p className="text-[14px]">{item.description}</p>
                         <hr />
-                      </>
+                      </div>
                     );
                   })}
                 </div>
@@ -69,7 +70,10 @@ function ModalComp() {
                   <b>Adresses</b> <br />
                   {modalpark.addresses?.map((address: any, index: number) => {
                     return (
-                      <p>{`${address?.type},${address?.postalCode},
+                      <p
+                        key={
+                          address.id
+                        }>{`${address?.type},${address?.postalCode},
                     ${address?.city},
                      ${address?.stateCode},
                       ${address?.line1},
