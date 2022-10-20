@@ -1,14 +1,24 @@
+import { DocumentData } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { allData, stateNames, stateAbbreviations, api } from '../data/data';
 import { atom, useRecoilState } from 'recoil';
-import { InputSearch, atomModal } from '../recoil/atom';
+import { allData, api, stateAbbreviations, stateNames } from '../data/data';
+import { IData } from '../data/types';
+import { atomModal, InputSearch } from '../recoil/atom';
 import Cards from './Cards';
 
-function Hero(props: any) {
-  const [datas, setDatas]: any = useState();
+function Hero() {
+  const [datas, setDatas] = useState<IData[] | DocumentData[]>([]);
   const [search, setSearch] = useRecoilState(InputSearch);
   const [activeModal, setActiveModal] = useState(false);
   const openModal = useRecoilState(atomModal);
+
+  const pages = () => {
+    const p = []
+    for (let i = 0; i < 9; i++) { 
+     p.push(<a key={i} className='flex-1 font-semibold  cursor-pointer justify-center flex items-center'>{i + 1}</a>)
+    }
+     return p
+  }
   const handleClick = (e: any) => {
     
     let words: any | null | ' ';
@@ -35,33 +45,37 @@ function Hero(props: any) {
     }
     search && fetchMyAPI();
   }, [search]);
-  console.log(datas, search);
+   console.log(datas, search);
   return (
-    <div className="relative p-3 flex  flex-col items-center">
-      <h1 className="text-2xl mb-5">Let&apos;s Find National Parks!</h1>
-      <div className=" flex justify-center gap-2 mb-4 items-center w-full">
+    <div className="relative  flex  justify-center m-auto max-w-[90rem]
+     flex-col items-center">
+      <div className="w-full h-[40rem] md:h-[40rem] gap-4 
+      rounded-b  
+      flex justify-center items-center md:rounded-b 
+       bg-slate-400">
         <input
           name="state"
           placeholder="eg. California"
-          onChange={()=>handleClick}
+          onChange={(e: any) => setSearch(e.target.value)}
           className="bg-slate-300 w-[14rem] rounded-full 
           focus:bg-slate-100 md:w-[15rem] lg:w-[20rem]
           font-semibold text-xl text-center h-10"
-          type="text"
-        />
-       
+          type="text"></input>
         <button
           onClick={handleClick}
-          className="h-10 w-20 rounded-md bg-slate-400">
+          className="h-10 w-20 text-slate-100  rounded-md bg-slate-600">
           find
         </button>
       </div>
 
-      <div className="w-full  min-h-[30rem]">
+      <div className="w-full flex flex-col md:grid ld:grid
+        md:grid-cols-2 mt-[-5rem]
+        lg:grid-cols-3 p-2 gap-4 md:max-w-[58rem] lg:max-w-[90rem]  min-h-[30rem]">
         {datas?.map((item: any) => {
           return <Cards key={item.id} {...item} />;
         })}
       </div>
+      <div className='w-[20rem] absolute bottom-0 flex justify-between items-center h-10'>{ pages()}</div>
     </div>
   );
 }

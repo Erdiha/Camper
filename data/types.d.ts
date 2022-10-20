@@ -1,3 +1,4 @@
+import { DocumentData } from 'firebase/firestore';
 export type IData = {
   id: string;
   activities: [];
@@ -15,7 +16,10 @@ export type IData = {
   url: string;
   fullName: string;
   description: string;
-  contacts: [];
+  contacts: {
+    emailAddresses: [{ description: string; emailAddress: string }];
+    phoneNumbers: [{ phoneNumber: string }];
+  };
   directionsInfo: string;
   directionsUrl: string;
   entranceFees: [];
@@ -24,7 +28,8 @@ export type IData = {
   topics: [];
   weatherInfo: string;
   name: string;
+  liked: boolean;
 };
 export interface IPark {
-  park: IData | null | any;
+  park: IData[];
 }

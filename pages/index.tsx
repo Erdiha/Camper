@@ -3,18 +3,43 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Hero from '../components/Hero';
 import Navbar from '../components/Navbar';
-import { url, api } from '../data/data';
-import { IPark } from '../data/types';
+import { url, api, allData } from '../data/data';
+import { IPark,IData } from '../data/types';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { InputSearch } from '../recoil/atom';
 
-export default function Home() {
-  const [datas, setDatas]: any = useState();
+interface IResponse{
+  total: string;
+  limit: string;
+  start: string;
+  data:[]
+}
+
+function Home(props:any) {
+  const[datas,setDatas]:any=useState([])
   const api = process.env.NEXT_PUBLIC_API_KEY;
   const stateName = useRecoilState(InputSearch);
+  let count = 10;
+  let limits = 0;
+
+   
+    
+    // async function fetchMyAPI(lim: number) {
+    //      let url = `https://developer.nps.gov/api/v1/alerts?start=${lim}&api_key=${api}`;
+    //     const allData1 = await fetch(url);
+    //     const allData = await allData1.json();
+        
+    //     setDatas((prev:any)=>[...prev,allData.data]);
+    //      limits = limits + 50;
+    // }
+    
+    // for (let i = 0; i < 2; i++) { 
+    //   //fetchMyAPI( limits)
+    // }
 
 
+console.log(limits,count)
   return (
     <div>
       <Head>
@@ -25,10 +50,13 @@ export default function Home() {
 
       <main className="z-[-1]">
         <Navbar />
-        <Hero props={datas} />
+        <Hero  />
       </main>
 
       <footer></footer>
     </div>
   );
-}
+};
+export default Home
+
+
