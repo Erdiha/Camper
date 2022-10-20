@@ -1,7 +1,7 @@
 import { doc, setDoc,deleteDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/Ai';
-import { MdAddCircle, MdFileDownloadDone } from 'react-icons/Md';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { MdAddCircle, MdFileDownloadDone } from 'react-icons/md';
 import { useRecoilState } from 'recoil';
 import Modal from '../components/Modal';
 import { IData } from '../data/types';
