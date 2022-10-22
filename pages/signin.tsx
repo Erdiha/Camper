@@ -28,7 +28,6 @@ const Signin = () => {
       : await Register(data.email, data.password);
   };
 
-  console.log(demo);
   return (
     <div className="relative flex h-screen w-screen flex-col  items-center justify-center
      bg-[#849d84]">

@@ -37,4 +37,11 @@
   font-semibold text-slate-100 md:border-t-4 pl-1 md:pl-0 md:border-l-0
    md:border-lime-400 justify-center mb-20 border-lime-400 border-l-4
  }
+ /* .banner::after{
+  content:"";
+  width:inherit;
+  height: inherit;
+  background-color: black;
+
+ } */
 }

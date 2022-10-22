@@ -13,27 +13,35 @@ function ModalComp() {
   const [show, setShow] = useRecoilState(atomModal);
   const [modalpark, setModalPark] = useRecoilState(modalPark);
   const handleClose = () => setShow(false);
-  const [libraryItem, setLibraryItem] = useRecoilState(modalPark);
   const { currentUser } = useAuth();
-  const userID = currentUser!.uid;
+ 
   const [added, setAdded] = useRecoilState(itemAddedOrRemoved);
+  const [allLibrary, setAllLibrary] = useState<IData[] | DocumentData[]>([]);
 
    const addMoviesToLibrary = async () => {
-     !added ? await setDoc(
-           doc(db, 'users', userID, 'myLib', libraryItem?.id.toString()!),
-           { ...libraryItem }
-         )
-       : await deleteDoc(
-           doc(
-             db,
-             'users',
-             currentUser!.uid,
-             'myLib',
-             libraryItem?.id.toString()!
-           )
-         );
+     const userID = currentUser!.uid;
+    console.log("inside the add movies")
+     !added ? await setDoc(doc(db, 'campers', userID, 'myparks', modalpark?.id.toString()!),{ ...modalpark })
+     :await deleteDoc(doc(db,'campers',currentUser!.uid,'myparks',modalpark?.id.toString()!));
    };
+ 
+
+  useEffect(() => {
+    console.log("inside the snpshot")
+    if (currentUser) {
+      return onSnapshot(
+        collection(db, 'campers', currentUser.uid, 'myparks'),
+        (snapshot) => setAllLibrary(snapshot.docs)
+      );
+    }
+  }, [db, modalpark?.id,added]);
   
+  useEffect(() => {
+    const found = allLibrary.some((result: any) => {
+      return result.data().id === modalpark?.id;
+    });
+    setAdded(found);
+  }, [allLibrary,added]);
   return (
     <>
       {modalpark && (
@@ -52,7 +60,7 @@ function ModalComp() {
                 {modalpark.images.map((item: any, index: number) => {
                   return (
                     index < 3 && (
-                      <div className="flex  justify-between  ">
+                      <div key={item.id} className="flex  justify-between  ">
                         <p className="absolute overflow-hidden bottom-0 md:w-56   text-white rounded opacity-[0.8] bg-slate-600 p-1">
                           {item.title.substring(0, 25) + '...'}
                         </p>
@@ -74,9 +82,9 @@ function ModalComp() {
                 <div className=" gap-2 items-center  flex flex-wrap">
                   
                   {modalpark?.activities?.map((item: any) => {
-                    return <span className=' h-[1.3rem] p-2 flex 
+                    return <span key={item.id} className=' h-[1.3rem] p-2 flex 
                     justify-center items-center bg-slate-200 text-green-900 rounded '
-                      key={item.id}>{item?.name}</span> ;
+                     >{item?.name}</span> ;
                   })}
                 </div>
                 <hr />
@@ -134,13 +142,12 @@ function ModalComp() {
               onClick={() => {
                 handleClose;
                 setModalPark(null);
-                setLibraryItem(null);
               }}>
               Close
             </Button>
             <Button onClick={() => {
                 addMoviesToLibrary()
-            }} variant="primary">Add to Library</Button>
+            }} variant="primary">{`${added?'Remove Item':'Add to Library'}`}</Button>
           </Modal.Footer>
         </Modal>
       )}

@@ -23,23 +23,6 @@ function Home(props:any) {
   let count = 10;
   let limits = 0;
 
-   
-    
-    // async function fetchMyAPI(lim: number) {
-    //      let url = `https://developer.nps.gov/api/v1/alerts?start=${lim}&api_key=${api}`;
-    //     const allData1 = await fetch(url);
-    //     const allData = await allData1.json();
-        
-    //     setDatas((prev:any)=>[...prev,allData.data]);
-    //      limits = limits + 50;
-    // }
-    
-    // for (let i = 0; i < 2; i++) { 
-    //   //fetchMyAPI( limits)
-    // }
-
-
-console.log(limits,count)
   return (
     <div>
       <Head>

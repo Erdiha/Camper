@@ -1,25 +1,32 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { modalPark } from '../recoil/atom';
+import { heroPhotos, modalPark } from '../recoil/atom';
 
 function Carousel() {
-  const [modalpark, setModalPark] = useRecoilState(modalPark);
+  const images = useRecoilState(heroPhotos);
+  console.log(images[0])
   return (
     <>
       <div
         id="carouselExampleControls"
         className="carousel slide relative"
         data-bs-ride="carousel">
-        <div className="carousel-inner relative w-full overflow-hidden">
-          {modalpark?.images.map((item: any, index: number) => {
-            return (
-              <div
-                key={index}
-                className="carousel-item active relative float-left w-full">
-                <img key={index} className="block w-full" src={item.url} />
-              </div>
-            );
-          })}
+        <div className="carousel-inner -z relative w-full overflow-hidden">
+          {images.map((item: any, index: number) => {
+                  return (
+                    
+                      <div key={item.id} className="flex  justify-between  ">
+                       
+
+                        <img
+                          key={item}
+                          className="w-full h-96 md:h-auto object-cover 
+                      md:w-60 rounded-lg"
+                          src={item}></img>
+                      </div>
+                    
+                  );
+                })}
         </div>
         <button
           className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"

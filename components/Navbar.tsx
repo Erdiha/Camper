@@ -19,8 +19,8 @@ function Navbar() {
 
   return (
     <div
-      className="w-[100%] min-h-[100px] 
-    items-center p-14 max-h-[100px]   z-100 
+      className="w-[100%] min-h-[100px] static
+    items-center p-14 max-h-[100px]   z-1000 
      bg-slate-800  text-slate-200 flex  justify-between">
       <span className="text-3xl">ICON</span>
       <ul

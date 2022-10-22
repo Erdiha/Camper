@@ -11,18 +11,15 @@ import {
 import useAuth, { userLibrary }  from '../data/authservice';
 import { IData } from '../data/types';
 import { DocumentData } from 'firebase/firestore';
+import { modalPark } from './../recoil/atom';
 
 
 function Myplaces() {
-  const [libraryItem, setLibraryItem] = useRecoilState(libraryItemAtom);
-  const [allLibrary,setAllLibrary] = useRecoilState(allLibraryItemsAtoms);
-  const [added, setAdded] = useRecoilState(itemAddedOrRemoved);
-   const { currentUser } = useAuth();
+
+  const { currentUser } = useAuth();
   const lib:IData[] | DocumentData[] = userLibrary(currentUser?.uid);
-  console.log(libraryItem)
-   const userID = currentUser!.uid;
- 
-   console.log("liekd",lib)
+
+  console.log("library",lib)
   return (
     <div>
       <Navbar />
@@ -32,7 +29,7 @@ function Myplaces() {
         </div>
         <div className="w-[90%] md:grid mx-5 grid-cols-3 gap-4 p-2  min-h-[20rem]">
           {lib?.map((item: any) => {
-            return <Cards key={item?.id} {...item} />;
+            return <Cards key={item.id} {...item} />;
           })}
         </div>
       </div>

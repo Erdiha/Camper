@@ -130,7 +130,7 @@ export const userLibrary = (UID: undefined | string) => {
   useEffect(() => {
     if (!UID) return;
 
-    return onSnapshot(collection(db, 'users', UID, 'myLib'), (snapshot) => {
+    return onSnapshot(collection(db, 'campers', UID, 'myparks'), (snapshot) => {
       setGetList(
         snapshot.docs.map((doc) => ({
           id: doc.id,
