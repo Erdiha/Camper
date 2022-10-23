@@ -21,7 +21,6 @@ import {
   itemAddedOrRemoved,
   libraryItemAtom,
   modalPark,
-  textadd,
   
 } from '../recoil/atom';
 import useAuth from '../data/authservice';
@@ -36,7 +35,6 @@ function Cards(props:IData) {
   const [allLibrary, setAllLibrary] = useState<IData[] | DocumentData[]>([]);
    const [likes, setLikes] = useState<IData[] | DocumentData[]>([]);
   const [addOrDelete, setaddOrDelete] = useState('');
-  const [textAdd, setTextAdd] = useRecoilState(textadd);
   const [liked,setLiked] = useState(false);
 
    //add or delete the item from library database
@@ -122,7 +120,7 @@ function Cards(props:IData) {
               className="cursor-pointer 
             ">
               {!added ? <TiPlus   className="add-tick" /> : <TiTick    className="add-tick" />}
-              {textAdd}
+             
             </button>
             <p className="add-alert  text-slate-300">{addOrDelete}</p>
             <button

@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import React, { useState, useRef, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import useAuth from '../data/authservice';
 function Navbar() {
   const [showNavbar, setShowNavbar] = useState(false);
   let innerWidth: any = '';
-
+  const {logout}= useAuth()
   useEffect(() => {
     const getUl = document.getElementById('#navbar-ul')! as HTMLUListElement;
     if (typeof window !== 'undefined') {
@@ -19,14 +19,14 @@ function Navbar() {
 
   return (
     <div
-      className="w-[100%] min-h-[100px] static
-    items-center p-14 max-h-[100px]   z-1000 
+      className=" min-h-[100px] fixed-top min-w-full
+    items-center p-14 max-h-[100px]   z-1000
      bg-slate-800  text-slate-200 flex  justify-between">
       <span className="text-3xl">ICON</span>
       <ul
         id="navbar-ul"
         className={`justify-around  flex flex-col  transform left-[-50rem] top-[7rem]  z-[10]
-        items-center transition ease-in-out duration-[1s] w-[100%] h-[30rem] bg-gray-800 text-2xl
+        items-center transition ease-in-out duration-1000 w-[100%] h-[30rem] bg-gray-800 text-2xl
         md:flex-row  md:w-[65%] md:h-[100px]   absolute
         md:top-[0rem]  md:left-0 md:relative md:bg-transparent
         md:text-2xl md:gap-2 ${showNavbar && 'navbar-mobile'}
@@ -37,12 +37,9 @@ function Navbar() {
         <Link href="/Myplaces">
           <li className="navbar-items"> PARKS</li>
         </Link>
-
+        
+          <li onClick={logout} className="navbar-items">LOG OUT</li>
        
-
-        <Link href="/Account">
-          <li className="navbar-items">ACCOUNT</li>
-        </Link>
       </ul>
       <div
         onClick={() => {

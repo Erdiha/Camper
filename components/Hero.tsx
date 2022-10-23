@@ -35,10 +35,12 @@ function Hero() {
       setSearchDone(true)
   };
   useEffect(()=>{
-    datas?.map((item:any)=>{
+    let counter = 0;
+  counter<8 &&  datas?.map((item:any)=>{
        item.images.map((image:any)=>{
       const t:any = image.url
        photos.push(t)
+       counter++;
        })
       })
       setHPhotos(photos)
@@ -61,17 +63,20 @@ function Hero() {
        
       <div  
       className={`w-full h-[40rem] md:h-[40rem]  min-h-full
-      rounded-b  banner grid relative grid-cols-5 overflow-hidden
+      rounded-b  banner grid relative grid-cols-2  overflow-hidden
        justify-center items-center md:rounded-b  bg-gradient-to-b from-black to-slate-500
        bg-slate-400`}>
       { 
         hphotos?.map((item:any,index:number)=>{
-          return <img key={index} className=' h-full w-full opacity-[0.4]  bg-gradient-to-b from-black' src={item} alt="" />
+          return <img key={index} className=' h-full w-full opacity-[0.3]
+            bg-gradient-to-b from-black' src={item} alt="" />
         })
       }
        <div className='absolute  left-0 right-0 text-center'>
+      
          <input
           name="state"
+          required
           placeholder="eg. California"
           onChange={(e: any) =>setSearch(e.target.value)}
           className="bg-slate-200 w-[14rem] rounded-full 
@@ -80,7 +85,8 @@ function Hero() {
           type="text"></input>
         <button
           onClick={handleClick}
-          className="h-10 w-20 text-slate-100 font-semibold  rounded-md bg-slate-500">
+          className="h-10 w-20 text-[20px] transition duration-300 ease-in-out
+           hover:scale-105 text-slate-100 font-semibold border-b-4 border-white  rounded-md bg-slate-800">
           FIND
         </button>
        </div>

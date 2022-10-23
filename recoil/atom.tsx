@@ -29,14 +29,6 @@ export const itemAddedOrRemoved = atom({
   key: 'itemAddedOrRemoved',
   default: false
 });
-export const textadd = atom({
-  key: 'textadd',
-  default:""
-})
-export const likedItemBoolean = atom({
-  key: 'likedItemBoolean',
-  default: false
-})
 
 export const heroPhotos = atom<[] | null>({
   key:"heroPhotos",
