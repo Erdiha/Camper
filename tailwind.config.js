@@ -9,6 +9,11 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+      },
+    },
+    extend: {
       backgroundImage: {
         'hero-wrapper':
           "linear-gradient(to right bottom, rgba('#000',0.8),[rgb(173,221,208,0.5)]))",

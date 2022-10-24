@@ -16,14 +16,7 @@ export const modalPark = atom<null | IData | DocumentData>({
   default: null,
 });
 
-export const libraryItemAtom = atom<null | IData | DocumentData>({
-  key: 'libraryItemAtom',
-  default:null
-})
-export const allLibraryItemsAtoms = atom<null | [] | DocumentData[]>({
-  key: 'allLibraryItemsAtoms',
-  default: null,
-});
+
 
 export const itemAddedOrRemoved = atom({
   key: 'itemAddedOrRemoved',

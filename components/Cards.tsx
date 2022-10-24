@@ -4,26 +4,24 @@ import {
   doc,
   DocumentData,
   onSnapshot,
-  setDoc,
-  
+  setDoc
 } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { MdAddCircle, MdFileDownloadDone } from 'react-icons/md';
+import { TiPlus, TiTick } from 'react-icons/ti';
 import { useRecoilState } from 'recoil';
 import Modal from '../components/Modal';
+import useAuth from '../data/authservice';
 import { IData } from '../data/types';
 import { db } from '../firebaseAuth';
-import { TiTick, TiPlus } from 'react-icons/ti';
 import {
-  allLibraryItemsAtoms,
+
   atomModal,
   itemAddedOrRemoved,
-  libraryItemAtom,
-  modalPark,
-  
+
+  modalPark
 } from '../recoil/atom';
-import useAuth from '../data/authservice';
 
 
 function Cards(props:IData) {
@@ -33,7 +31,7 @@ function Cards(props:IData) {
   const [modalpark, setModalPark] = useRecoilState(modalPark);
   const [added, setAdded] = useState(false);
   const [allLibrary, setAllLibrary] = useState<IData[] | DocumentData[]>([]);
-   const [likes, setLikes] = useState<IData[] | DocumentData[]>([]);
+  const [likes, setLikes] = useState<IData[] | DocumentData[]>([]);
   const [addOrDelete, setaddOrDelete] = useState('');
   const [liked,setLiked] = useState(false);
 
@@ -89,8 +87,7 @@ function Cards(props:IData) {
     transition ease-in-out duration-300">
       <div
         className="flex flex-col 
-       h-full relative
-      md:flex-col 
+        relative md:flex-col w-[24rem] lg:w-[30rem] p-[1px] m-2
        lg:max-w-[60rem] rounded-lg bg-white shadow-lg">
         <img
           className=" w-full min-h-96 md:h-[20rem] object-cover
@@ -103,18 +100,18 @@ function Cards(props:IData) {
             {props?.fullName}
           </h5>
 
-          <p className="text-gray-700  transition duration-300 ease-in-and-out  text-base mb-4">
+          <p className="text-gray-700  transition text-base mb-4">
             {!readMore
               ? props.description?.substring(0, 200) + '...'
               : props?.description}{' '}
             <span
               onClick={() => setReadMore((prev) => !prev)}
-              className="text-slate-400 underline italic hover:text-slate-600 font-semibold cursor-pointer">
+              className="text-slate-400 underline italic hover:text-slate-600  font-semibold cursor-pointer">
               {readMore === true ? 'Read Less' : 'Read More'}
             </span>
           </p>
 
-          <div className="w-full  mr-0 h-12 flex justify-end items-center transition duration-300 ease-in-out">
+          <div className="w-full  mr-0 h-12 flex justify-end items-center ">
             <button
               onClick={addMoviesToLibrary}
               className="cursor-pointer 
