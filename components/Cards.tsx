@@ -8,7 +8,6 @@ import {
 } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { MdAddCircle, MdFileDownloadDone } from 'react-icons/md';
 import { TiPlus, TiTick } from 'react-icons/ti';
 import { useRecoilState } from 'recoil';
 import Modal from '../components/Modal';
@@ -16,10 +15,7 @@ import useAuth from '../data/authservice';
 import { IData } from '../data/types';
 import { db } from '../firebaseAuth';
 import {
-
   atomModal,
-  itemAddedOrRemoved,
-
   modalPark
 } from '../recoil/atom';
 
@@ -87,13 +83,13 @@ function Cards(props:IData) {
     transition ease-in-out duration-300">
       <div
         className="flex flex-col 
-        relative md:flex-col w-[24rem] lg:w-[30rem] p-[1px] m-2
+        relative md:flex-col w-[22rem] lg:w-[30rem] p-[1px] m-2
        lg:max-w-[60rem] rounded-lg bg-white shadow-lg">
         <img
-          className=" w-full min-h-96 md:h-[20rem] object-cover
+          className=" w-full h-[16rem] md:h-[20rem] object-cover
           rounded-lg  "
           src={`${props?.images[0]?.url}`}
-          alt=""
+          alt={`${props?.images[0]?.altText}`}
         />
         <div className="p-6  flex flex-col justify-start ">
           <h5 className="text-gray-900 text-xl font-medium mb-2">
@@ -116,8 +112,11 @@ function Cards(props:IData) {
               onClick={addMoviesToLibrary}
               className="cursor-pointer 
             ">
-              {!added ? <TiPlus   className="add-tick" /> : <TiTick    className="add-tick" />}
-             
+              {!added ? (
+                <TiPlus className="add-tick" />
+              ) : (
+                <TiTick className="add-tick" />
+              )}
             </button>
             <p className="add-alert  text-slate-300">{addOrDelete}</p>
             <button

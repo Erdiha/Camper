@@ -1,4 +1,3 @@
-import { DocumentData } from 'firebase/firestore';
 export interface IData  {
   id: string;
   activities: [];
@@ -36,6 +35,4 @@ export interface IData  {
   weatherInfo: string;
   name: string;
 }
-export interface IPark {
-  park: IData[];
-}
+

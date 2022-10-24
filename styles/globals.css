@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
 
 
 @layer components {
@@ -25,7 +24,7 @@
   .navbar-items {
     @apply cursor-pointer md:text-[20px] lg:text-2xl 
     transition ease-in-out duration-[.400] rounded-md
-    md:w-[15rem] md:h-[5rem] flex items-center justify-center;
+    md:w-[10rem] md:h-[5rem] flex items-center justify-center;
   }
   .navbar-items:hover {
     @apply bg-gray-600;
@@ -35,15 +34,13 @@
   @apply w-[100%] h-[18%] p-2 rounded
  }
  .icon{
-  @apply  left-20 top-20 text-4xl
-  font-semibold text-slate-100 md:border-t-4 pl-1 md:pl-0 md:border-l-0
-   md:border-lime-400 justify-center mb-20 border-lime-400 border-l-4
+  @apply  left-0 right-0 text-center m-auto text-4xl h-[90vh] 
+   p-6 md:h-[60rem] absolute z-0
+  font-semibold text-slate-100 md:border-t-4  md:pl-5 md:border-l-0
+   md:border-lime-400 justify-center mb-20 border-green-500 border-l-4
  }
- /* .banner::after{
-  content:"";
-  width:inherit;
-  height: inherit;
-  background-color: black;
-
- } */
+ .imgContainer{      
+    -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, 
+    from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  }
 }
