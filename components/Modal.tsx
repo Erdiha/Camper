@@ -10,24 +10,22 @@ import {  atomModal, itemAddedOrRemoved, modalPark } from '../recoil/atom';
 
 
 function ModalComp() {
+  //react and recoil hooks
   const [show, setShow] = useRecoilState(atomModal);
   const [modalpark, setModalPark] = useRecoilState(modalPark);
   const handleClose = () => setShow(false);
   const { currentUser } = useAuth();
- 
   const [added, setAdded] = useRecoilState(itemAddedOrRemoved);
   const [allLibrary, setAllLibrary] = useState<IData[] | DocumentData[]>([]);
-
+  //if movie is already added then remove else add (toggles)
    const addMoviesToLibrary = async () => {
      const userID = currentUser!.uid;
-    console.log("inside the add movies")
      !added ? await setDoc(doc(db, 'campers', userID, 'myparks', modalpark?.id.toString()!),{ ...modalpark })
      :await deleteDoc(doc(db,'campers',currentUser!.uid,'myparks',modalpark?.id.toString()!));
    };
  
-
+   //get my library from database
   useEffect(() => {
-    console.log("inside the snpshot")
     if (currentUser) {
       return onSnapshot(
         collection(db, 'campers', currentUser.uid, 'myparks'),
@@ -35,7 +33,7 @@ function ModalComp() {
       );
     }
   }, [db, modalpark?.id,added]);
-  
+  //check the database if the item is already saved in library
   useEffect(() => {
     const found = allLibrary.some((result: any) => {
       return result.data().id === modalpark?.id;
@@ -99,7 +97,7 @@ function ModalComp() {
                         <em className="font-semibold m-0 text-[12px] text-red-400">
                           {item.cost}$
                         </em>
-                        <hr />
+                        <hr  className='m-[2px]'/>
                       </div>
                     );
                   })}

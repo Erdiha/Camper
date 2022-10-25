@@ -4,6 +4,9 @@
 
 
 @layer components {
+  html{
+    @apply bg-gradient-to-b  from-slate-300 to-slate-300 
+  }
   .navbar-mobile {
     @apply translate-x-[50rem] md:translate-y-0;
   }
@@ -42,5 +45,15 @@
  .imgContainer{      
     -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, 
     from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  }
+  .cards.active{
+    @apply  translate-y-[0px]
+     opacity-100
+
+  }
+  .cards{
+    @apply flex justify-center my-3 h-full translate-y-[100px] 
+     opacity-0
+   
   }
 }

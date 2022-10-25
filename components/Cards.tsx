@@ -29,7 +29,30 @@ function Cards(props:IData) {
   const [allLibrary, setAllLibrary] = useState<IData[] | DocumentData[]>([]);
   const [likes, setLikes] = useState<IData[] | DocumentData[]>([]);
   const [addOrDelete, setaddOrDelete] = useState('');
-  const [liked,setLiked] = useState(false);
+  const [liked, setLiked] = useState(false);
+ //handes animation with observer
+  
+    const getCards = document.querySelectorAll('.cards')!;
+    const cardsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          entry.target.classList.toggle('active', entry.isIntersecting);
+          if (entry.isIntersecting) {
+            cardsObserver.unobserve(entry.target)
+          };
+        });
+      }, {
+      threshold: 0.4
+    }
+    );
+    if (getCards) {
+      getCards.forEach((c) => {
+        cardsObserver.observe(c);
+      });
+    };
+
+
+
 
    //add or delete the item from library database
    const addMoviesToLibrary = async () => {
@@ -79,11 +102,11 @@ function Cards(props:IData) {
 
   return (
     <div
-      className="flex justify-center my-3 h-full
-    transition ease-in-out duration-300">
+   
+      className="cards transition ease-in-out duration-[0.4s]">
       <div
         className="flex flex-col 
-        relative md:flex-col w-[22rem] lg:w-[30rem] p-[1px] m-2
+        relative md:flex-col w-[22rem] lg:w-[30rem]  m-2
        lg:max-w-[60rem] rounded-lg bg-white shadow-lg">
         <img
           className=" w-full h-[16rem] md:h-[20rem] object-cover
@@ -159,15 +182,4 @@ function Cards(props:IData) {
 }
 
 export default Cards;
-{
-  /* <div key={item.id}>
-            <p>{item.fullName}</p>
 
-            <img
-              src={`${item.images[0].url}`}
-              sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-            />
-          </div> */
-}

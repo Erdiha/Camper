@@ -10,17 +10,19 @@ import Cards from './Cards';
 
 function Hero() {
   //states hooks
-  const [datas, setDatas] = useState<IData[] | DocumentData[]>([]);
+  const [allData, setAllData] = useState<IData[] | DocumentData[]>([]);
   const [activities,setActivities] = useState([])
   const [activity,setActivity]:any|null = useState([])
   const [search, setSearch] = useRecoilState(InputSearch);
   const [selectedOp,setSelectedOp] =useState("")
   const [navbackground, setNavBackground] = useRecoilState(navItemBackground);
+  const [datas, setDatas] = useState<IData[] | DocumentData[]>([]);
+
 
   //handles search term by capitalizing first letter of each words
   const handleClick = () => {
     let words: any | null | ' ';
-    if (search !=="") {
+    if (search !=="" && search!==undefined) {
       words = search.split(' ');
       if (words) {
         for (let i = 0; i < words.length; i++) {
@@ -30,7 +32,10 @@ function Hero() {
         const stateAbbr = stateAbbreviations[stateIndex];
         setSearch(stateAbbr);
       };
-    };
+    }
+    else{
+      alert("Please Input Ihe State Name To Search")
+    }
   };
 
 
@@ -45,7 +50,7 @@ function Hero() {
       setActivities(allData.data)
     }
     fetchMyAPI();
-  },[])
+  },[selectedOp])
   //set default activity as none and fetch all activitiy names  
   useEffect(() => {
     setActivity([{value:"None",label:"None"}])//stop accumulating same values every time ther eis rerendering
@@ -60,36 +65,44 @@ function Hero() {
     async function fetchMyAPI() {
       const allData1 = await fetch(url);
       const allData = await allData1.json();
+      setAllData(allData.data)
       setDatas(allData.data)
-      setSelectedOp("")
+      searchActivities()
+      setSelectedOp('')
     }
-    fetchMyAPI();
+   search !=="" && fetchMyAPI();
   }, [search]);
 
   //handles the downdown activity selection
   const handleOptionChange = (selectedOption: any) => {
     setSelectedOp(selectedOption.label)
+    
    if (selectedOption.label !== 'None')
-    { const res = datas.filter((item) =>
-       item.activities.find((a: any) => a.name === selectedOption.label)
-     );
-    setDatas(res)}
+    { const res = allData.filter((item) =>
+      item.activities.find((a: any) => a.name === selectedOption.label)
+    );
+      setDatas(res)
+    }
+   else if (selectedOption.label === undefined || selectedOption.label == "None") {
+     setDatas(allData)
+    }
    
   };
   //activity jsx function returns select with dropdown activities
   const searchActivities = () => {
     const options = activity;
+   
     return (
       <Select
-        placeholder="Select an Activity..."
+        placeholder="Select An Activity..."
         onChange={handleOptionChange}
         className="md:w-[30rem] w-[21rem] "
         isSearchable={false}
-        options={options || null}
+        options={options}
+       
       />
     );
   };
- 
   return (
     <div
       className="relative  bg-gradient-to-b transition-all duration-300 ease-in-out
@@ -104,10 +117,10 @@ function Hero() {
           className="imgContainer h-full w-full opacity-[1]
             bg-gradient-to-b from-black"
           src={datas[0]?.images[0]?.url}
-          alt=""
+          alt={datas[0]?.images[0]?.altText}
         />
 
-        <div className="absolute left-0 right-0 text-center">
+        <div className="absolute left-0 right-0 top-[13rem] ms:top-[0rem] text-center">
           <div className="mb-8  ">
             <input
               name="state"
@@ -118,44 +131,51 @@ function Hero() {
                 setSearch(e.target.value);
               }}
               className="bg-slate-200 w-[14rem] rounded-lg 
-          focus:bg-slate-100 md:w-[17rem] lg:w-[23rem] mr-6
+          md:w-[17rem] lg:w-[23rem] mr-6
           font-semibold md:text-xl text-center h-10 text-[16px]"
               type="text"></input>
-            <button
-              onClick={handleClick}
-              className="h-10 w-20 text-[20px] transition duration-300 ease-in-out
+            {search !== '' && search !== undefined && (
+              <button
+                onClick={handleClick}
+                className="h-10 w-20 text-[20px] transition duration-300 ease-in-out
            hover:scale-105 text-slate-100 font-semibold border-b-4 border-white  rounded-md bg-slate-800">
-              FIND
-            </button>
+                FIND
+              </button>
+            )}
           </div>
           <section className="flex justify-center  text-center">
             {searchActivities()}
           </section>
-          (
-          <p
-            className="text-white w-[14rem] rounded-lg  mt-[5rem]
-        md:w-[17rem] lg:w-[23rem] p-1 md:p-2 absolute left-5  bg-black/50
+
+          {search !== '' && (
+            <p
+              className="text-white w-[14rem] rounded-lg  md:mt-[5rem]  mt-[3rem]
+
+        md:w-[17rem] lg:w-[23rem] p-1 md:p-2 absolute md:left-5 left-8  bg-black/50
           font-semibold text-xl ">
-            {datas.length !== 0
-              ? datas.length === 1
-                ? selectedOp !== 'None'
-                  ? `There Is One Parks with ${selectedOp} in ${search}`
-                  : `There Is One Parks in ${selectedOp} `
-                : selectedOp !== 'None' && selectedOp !== ''
-                ? `There Are ${datas.length} Parks with  ${selectedOp} in ${search}`
-                : `There Are ${datas.length} Parks in ${search}`
-              : `0 Result Found`}
-          </p>
-          )
+              {datas.length !== 0
+                ? datas.length === 1
+                  ? selectedOp !== 'None'
+                    ? `There Is One Parks with ${selectedOp} in ${search}`
+                    : `There Is One Parks in ${selectedOp} `
+                  : selectedOp !== 'None' && selectedOp !== ''
+                  ? `There Are ${datas.length} Parks with  ${selectedOp} in ${search}`
+                  : `There Are ${datas.length} Parks in ${search}`
+                : `0 Result Found`}
+            </p>
+          )}
         </div>
       </div>
       {datas.length === 0 ? (
-        <p className="text-2xl">0 Result Found</p>
+        <p className="text-xl text-red-600 md:text-2xl flex flex-row text-center word-wrap p-4">
+          0 Results Found, Please Enter a State Name and Press the
+          &quot;FIND&quot; Button,
+        </p>
       ) : (
         <div
-          className="w-full flex flex-col md:grid ld:grid
-        md:grid-cols-2 mt-[-5rem] mb-10
-        lg:grid-cols-3 p-2 gap-4 md:max-w-[58rem] lg:max-w-[90rem]  min-h-[100vh]">
+          className="w-full flex flex-col md:grid 
+        md:grid-cols-2 md:mt-[-5rem] mb-10 mt-[-10rem]
+        lg:grid-cols-3 p-2 gap-4 md:max-w-[58rem] lg:max-w-[90rem]  ">
           {datas?.map((item: any) => {
             return <Cards key={item.id} {...item} />;
           })}
