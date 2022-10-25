@@ -47,7 +47,7 @@ const Signin = () => {
           mper
         </p>
         <p className=" flex  text-[25px]  mt-3 italic font-thin ">
-          Natianol Parks In USA at Your Fingertips.
+          National Parks In USA at Your Fingertips.
         </p>
       </span>
 
