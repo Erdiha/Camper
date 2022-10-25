@@ -73,7 +73,7 @@ const Signin = () => {
             required
             className="input"
             type="password"
-            placeholder="Your password"
+            placeholder="password"
           />
           <button
             onClick={() => setUserLogin(true)}
