@@ -17,7 +17,6 @@ const Signin = () => {
   } = useForm<Iinput>();
   //when the user clicked button to login, do auth
   const onSubmit: SubmitHandler<Iinput> = async (data: any) => {
-    console.log(data);
     if (demo) {
       data.email = 'demo@demo.com';
       data.password = '123456';
